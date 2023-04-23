@@ -1,27 +1,5 @@
 FROM whyour/qinglong:latest
 
-ARG QL_MAINTAINER="whyour"
-LABEL maintainer="${QL_MAINTAINER}"
-ARG QL_URL=https://github.com/${QL_MAINTAINER}/qinglong.git
-ARG QL_BRANCH=master
-ARG QL_STATIC_BRANCH=master
-
-RUN set -x \
-    && apk update \
-    && apk add nodejs npm git \
-    && npm i -g pnpm \
-    && cd /tmp/build \
-    && pnpm install --prod
-    
-ENV PNPM_HOME=/root/.local/share/pnpm \
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.local/share/pnpm:/root/.local/share/pnpm/global/5/node_modules:$PNPM_HOME \
-    LANG=zh_CN.UTF-8 \
-    SHELL=/bin/bash \
-    PS1="\u@\h:\w \$ " \
-    QL_DIR=/ql \
-    QL_BRANCH=${QL_BRANCH}
-    
-WORKDIR ${QL_DIR}
 
 RUN git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
     && cd ${QL_DIR} \
