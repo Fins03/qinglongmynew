@@ -10,7 +10,7 @@ ENV PNPM_HOME=/root/.local/share/pnpm \
 
 WORKDIR ${QL_DIR}
 
-RUN && apk --no-cache add -f bash \
+RUN apk --no-cache add -f bash \
                              coreutils \
                              moreutils \
                              git \
